@@ -67,7 +67,7 @@ class CreatableSelect extends React.Component {
 				options: excludeOptions.concat(filteredOptions)
 			});
 
-			if (isOptionUnique) {
+			if (this.props.isAsyncCreatable ? isOptionUnique && !this.props.isLoading : isOptionUnique) {
 				const prompt = promptTextCreator(this.inputValue);
 
 				this._createPlaceholderOption = newOptionCreator({
@@ -257,6 +257,10 @@ CreatableSelect.propTypes = {
 
 	// See Select.propTypes.filterOptions
 	filterOptions: PropTypes.any,
+
+	isAsyncCreatable: PropTypes.bool,
+
+	isLoading: PropTypes.bool,
 
 	// Searches for any matching option within the set of options.
 	// This function prevents duplicate options from being created.
