@@ -2343,7 +2343,7 @@ var CreatableSelect = function (_React$Component) {
 					options: excludeOptions.concat(filteredOptions)
 				});
 
-				if (_isOptionUnique2) {
+				if (this.props.isAsyncCreatable ? _isOptionUnique2 && !this.props.isLoading : _isOptionUnique2) {
 					var prompt = promptTextCreator(this.inputValue);
 
 					this._createPlaceholderOption = _newOptionCreator({
@@ -2558,6 +2558,10 @@ CreatableSelect.propTypes = {
 	// See Select.propTypes.filterOptions
 	filterOptions: PropTypes.any,
 
+	isAsyncCreatable: PropTypes.bool,
+
+	isLoading: PropTypes.bool,
+
 	// Searches for any matching option within the set of options.
 	// This function prevents duplicate options from being created.
 	// ({ option: Object, options: Array, labelKey: string, valueKey: string }): boolean
@@ -2624,7 +2628,7 @@ var AsyncCreatableSelect = function (_React$Component) {
 					var asyncRef = ref;
 					return React__default.createElement(
 						CreatableSelect,
-						asyncProps,
+						_extends({}, asyncProps, { isAsyncCreatable: true }),
 						function (_ref2) {
 							var ref = _ref2.ref,
 							    creatableProps = objectWithoutProperties(_ref2, ['ref']);
